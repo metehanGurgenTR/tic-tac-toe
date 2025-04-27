@@ -33,7 +33,11 @@ body {
   user-select: none;
 }
 
-span {
+.player-x, .player-o {
   font-size: 5rem;
   color: hsl(52, 38%, 55%);
+}
+
+.player-o {
+  color: hsl(192, 56%, 63%);
 }
