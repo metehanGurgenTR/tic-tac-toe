@@ -27,4 +27,13 @@ body {
 .square1, .square2, .square3, .square4, .square5, .square6, .square7, .square8, .square9 {
   width: 33%;
   border: 0.3rem solid black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  user-select: none;
+}
+
+span {
+  font-size: 5rem;
+  color: hsl(52, 38%, 55%);
 }
