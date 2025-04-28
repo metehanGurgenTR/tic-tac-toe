@@ -33,6 +33,19 @@ const column3 = [
   (square9 = document.querySelector(".square9")),
 ];
 
+// diagonal squares
+const diagonal1 = [
+  (square1 = document.querySelector(".square1")),
+  (square5 = document.querySelector(".square5")),
+  (square9 = document.querySelector(".square9")),
+];
+
+const diagonal2 = [
+  (square3 = document.querySelector(".square3")),
+  (square5 = document.querySelector(".square5")),
+  (square7 = document.querySelector(".square7")),
+];
+
 /* gets the square that was clicked on and runs the insertLetter
    function
 
