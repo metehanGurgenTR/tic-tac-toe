@@ -16,29 +16,35 @@ for (let i = 1; i <= 9; i++) {
 
 // columns that contain the squares in each column
 const column1 = [
-  square1 = document.querySelector(".square1"),
-  square4 = document.querySelector(".square4"),
-  square7 = document.querySelector(".square7"),
+  (square1 = document.querySelector(".square1")),
+  (square4 = document.querySelector(".square4")),
+  (square7 = document.querySelector(".square7")),
 ];
 
 const column2 = [
-  square2 = document.querySelector(".square2"),
-  square5 = document.querySelector(".square5"),
-  square8 = document.querySelector(".square8"),
+  (square2 = document.querySelector(".square2")),
+  (square5 = document.querySelector(".square5")),
+  (square8 = document.querySelector(".square8")),
 ];
 
 const column3 = [
-  square3 = document.querySelector(".square3"),
-  square6 = document.querySelector(".square6"),
-  square9 = document.querySelector(".square9"),
+  (square3 = document.querySelector(".square3")),
+  (square6 = document.querySelector(".square6")),
+  (square9 = document.querySelector(".square9")),
 ];
 
 /* gets the square that was clicked on and runs the insertLetter
    function
 
    passes the squares parent element (row) and the currentPlayer to 
-   checkRows function which checks if player1 or player2 wins,
-   currently only checks the rows
+   checkRows function which checks if player1 or player2 wins
+
+   passes the square that was clicked on to the getColumn function
+   which returns the column the square is in
+   
+   then passes the column and currentPlayer to the checkColumns 
+   function which checks if player1 or player2 wins
+   currently only checks the rows and columns
 
    will only run the switchPlayer function if a 
    letter was inserted into a valid square
@@ -48,7 +54,9 @@ addEventListener("click", (event) => {
   const inserted = insertLetter(square.className, currentPlayer);
   const s = document.querySelector("." + square.className.split(" ")[0]);
   const row = s.parentElement;
+  const column = getColumn(s);
   checkRows(row, currentPlayer);
+  checkColumns(column, currentPlayer);
   if (inserted) {
     currentPlayer = switchPlayer(currentPlayer);
   }
@@ -73,6 +81,36 @@ const checkRows = (row, currentPlayer) => {
   }
 };
 
+const checkColumns = (column, currentPlayer) => {
+  const letter1 = column[0].textContent.trim();
+  const letter2 = column[1].textContent.trim();
+  const letter3 = column[2].textContent.trim();
+  if (currentPlayer === "player1") {
+    if (letter1 === "X" && letter2 === "X" && letter3 === "X") {
+      setTimeout(() => {
+        alert("Player 1 Wins!");
+      }, 3);
+    }
+  } else {
+    if (letter1 === "O" && letter2 === "O" && letter3 === "O") {
+      setTimeout(() => {
+        alert("Player 2 Wins!");
+      }, 3);
+    }
+  }
+};
+
+function getColumn(square) {
+  let column;
+  if (column1.includes(square)) {
+    column = column1;
+  } else if (column2.includes(square)) {
+    column = column2;
+  } else {
+    column = column3;
+  }
+  return column;
+}
 /* check if set contains the square that was clicked and is empty
    if so, insert letter X or O into the square based on currentPlayer
 */
