@@ -41,3 +41,7 @@ body {
 .player-o {
   color: hsl(192, 56%, 63%);
 }
+
+.hasLetter {
+  pointer-events: none;
+}
