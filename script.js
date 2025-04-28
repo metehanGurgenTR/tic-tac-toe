@@ -27,12 +27,12 @@ for (let i = 1; i <= 9; i++) {
 addEventListener("click", (event) => {
   const square = event.target;
   const inserted = insertLetter(square.className, currentPlayer);
-  const s = document.querySelector('.'+square.className.split(' ')[0]);
+  const s = document.querySelector("." + square.className.split(" ")[0]);
   const row = s.parentElement;
   checkRows(row, currentPlayer);
   if (inserted) {
     currentPlayer = switchPlayer(currentPlayer);
-  } 
+  }
 });
 
 const checkRows = (row, currentPlayer) => {
@@ -40,45 +40,46 @@ const checkRows = (row, currentPlayer) => {
   const letter2 = row.children[1].textContent.trim();
   const letter3 = row.children[2].textContent.trim();
   if (currentPlayer === "player1") {
-    if (letter1 === 'X' && letter2 === 'X' && letter3 === 'X') {
+    if (letter1 === "X" && letter2 === "X" && letter3 === "X") {
       setTimeout(() => {
         alert("Player 1 Wins!");
       }, 3);
-    } 
+    }
   } else {
-    if (letter1 === 'O' && letter2 === 'O' && letter3 === 'O') {
+    if (letter1 === "O" && letter2 === "O" && letter3 === "O") {
       setTimeout(() => {
         alert("Player 2 Wins!");
       }, 3);
-    } 
+    }
   }
-  
-}
+};
 
 /* check if set contains the square that was clicked and is empty
    if so, insert letter X or O into the square based on currentPlayer
 */
 function insertLetter(square, currentPlayer) {
-    if (set.has(square)) {
-      const letter = document.createElement("span");
-      if (currentPlayer == player1) {
-        letter.classList.add("player-x");
-        letter.textContent = "X";
-      } else {
-        letter.classList.add("player-o");
-        letter.textContent = "O";
-      }
-      document.querySelector('.'+square).appendChild(letter);
-      document.querySelector('.'+square).classList.add("hasLetter");
-      return true;
+  if (set.has(square)) {
+    const letter = document.createElement("span");
+    if (currentPlayer == player1) {
+      letter.classList.add("player-x");
+      letter.textContent = "X";
     } else {
-      alert("Must insert a letter into an empty square!");
-      return false;
+      letter.classList.add("player-o");
+      letter.textContent = "O";
     }
+    document.querySelector("." + square).appendChild(letter);
+    document.querySelector("." + square).classList.add("hasLetter");
+    return true;
+  } else {
+    alert("Must insert a letter into an empty square!");
+    return false;
+  }
 }
 
 // switches and returns the currentPlayer
 function switchPlayer(currentPlayer) {
-  currentPlayer === player1 ? currentPlayer = player2 : currentPlayer = player1;
+  currentPlayer === player1
+    ? (currentPlayer = player2)
+    : (currentPlayer = player1);
   return currentPlayer;
 }
