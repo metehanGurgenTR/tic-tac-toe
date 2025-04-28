@@ -9,8 +9,10 @@ for (let i = 1; i <= 9; i++) {
 
 addEventListener("click", (event) => {{
   const square = event.target;
-  insertLetter(square.className, currentPlayer);
-  currentPlayer = switchPlayer(currentPlayer);
+  const inserted = insertLetter(square.className, currentPlayer);
+  if (inserted) {
+    currentPlayer = switchPlayer(currentPlayer);
+  } 
 }});
 
 function insertLetter(square, currentPlayer) {
@@ -25,8 +27,10 @@ function insertLetter(square, currentPlayer) {
       }
       document.querySelector('.'+square).appendChild(letter);
       document.querySelector('.'+square).classList.add("hasLetter");
+      return true;
     } else {
       alert("Must insert a letter into an empty square!");
+      return false;
     }
 }
 
