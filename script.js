@@ -14,6 +14,25 @@ for (let i = 1; i <= 9; i++) {
   set.add("square" + i);
 }
 
+// columns that contain the squares in each column
+const column1 = [
+  square1 = document.querySelector(".square1"),
+  square4 = document.querySelector(".square4"),
+  square7 = document.querySelector(".square7"),
+];
+
+const column2 = [
+  square2 = document.querySelector(".square2"),
+  square5 = document.querySelector(".square5"),
+  square8 = document.querySelector(".square8"),
+];
+
+const column3 = [
+  square3 = document.querySelector(".square3"),
+  square6 = document.querySelector(".square6"),
+  square9 = document.querySelector(".square9"),
+];
+
 /* gets the square that was clicked on and runs the insertLetter
    function
 
