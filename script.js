@@ -15,6 +15,18 @@ addEventListener("click", (event) => {{
   } 
 }});
 
+const squaresInRow1 = document.querySelector('.row1');
+addEventListener("click", () => {
+  const letter1 = squaresInRow1.children[0].textContent.trim();
+  const letter2 = squaresInRow1.children[1].textContent.trim();
+  const letter3 = squaresInRow1.children[2].textContent.trim();
+  if (letter1 === 'X' && letter2 === 'X' && letter3 === 'X') {
+    setTimeout(() => {
+      alert("Player 1 Wins!");
+    }, 3);
+  } 
+});
+
 function insertLetter(square, currentPlayer) {
     if (set.has(square)) {
       const letter = document.createElement("span");
