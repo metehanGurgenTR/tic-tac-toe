@@ -24,13 +24,34 @@ body {
   gap: 2rem;
 }
 
-.player,
-.playerScore p {
-  font-size: 3rem;
+.player1 {
+  color:hsl(52, 38%, 55%);
+}
+
+.player1, .player2 {
+  text-decoration: underline;
+  font-weight: 600;
+}
+
+.player2 {
+  color:hsl(192, 56%, 63%);
+}
+
+.player1, .player2,
+.playerScore1 p, .playerScore2 p {
+  font-size: 2.5rem;
   margin: 0px;
 }
 
-.playerScore {
+.playerScore1 p {
+  color: hsl(52, 38%, 55%);
+}
+
+.playerScore2 p {
+  color:hsl(192, 56%, 63%);
+}
+
+.playerScore1, .playerScore2 {
   display: flex;
   flex-direction: row;
   flex-wrap: nowrap;
