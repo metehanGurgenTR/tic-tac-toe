@@ -66,6 +66,8 @@ const diagonal2 = [
    
    checks the rows, columns, and diagonals
 
+   will check if it is a draw
+
    will only run the switchPlayer function if a 
    letter was inserted into a valid square
 */
@@ -79,6 +81,12 @@ addEventListener("click", (event) => {
   checkRows(row, currentPlayer);
   checkColumns(column, currentPlayer);
   checkDiagonal(diagonal, currentPlayer);
+  if (checkIfDraw(getRows())) {
+    setTimeout(() => {
+      alert("Draw!");
+      clearBoard();
+    }, 3);
+  }
   if (inserted) {
     currentPlayer = switchPlayer(currentPlayer);
   }
@@ -249,4 +257,30 @@ function score(player) {
   }
   player.score = player.score + 1;
   score.textContent = player.score;
+}
+
+// returns an array of each rows child elements
+const getRows = () => {
+    const row1 = document.querySelector(".row1").children;
+    const row2 = document.querySelector(".row2").children;
+    const row3 = document.querySelector(".row3").children;
+    const rows = [row1, row2, row3];
+  return rows;
+};
+
+/* checks if each square has a className of length 2.
+   a className of length 2 means the element has the 
+   additional "hasLetter" class. if all the squares
+   have this additional "hasLetter" class, and no winner 
+   has been declared, then all the squares have letters and it is a draw
+*/
+function checkIfDraw(rows) {
+  for (let i = 0; i < rows.length; i++) {
+    for (let j = 0; j < rows[i].length; j++) {
+      if (rows[i][j].className.split(" ").length !== 2) {
+        return false;
+      }
+    }
+  }
+  return true;
 }
