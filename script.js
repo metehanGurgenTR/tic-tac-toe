@@ -93,12 +93,14 @@ const checkRows = (row, currentPlayer) => {
     if (letter1 === "X" && letter2 === "X" && letter3 === "X") {
       setTimeout(() => {
         alert("Player 1 Wins!");
+        clearBoard();
       }, 3);
     }
   } else {
     if (letter1 === "O" && letter2 === "O" && letter3 === "O") {
       setTimeout(() => {
         alert("Player 2 Wins!");
+        clearBoard();
       }, 3);
     }
   }
@@ -113,12 +115,14 @@ const checkColumns = (column, currentPlayer) => {
     if (letter1 === "X" && letter2 === "X" && letter3 === "X") {
       setTimeout(() => {
         alert("Player 1 Wins!");
+        clearBoard();
       }, 3);
     }
   } else {
     if (letter1 === "O" && letter2 === "O" && letter3 === "O") {
       setTimeout(() => {
         alert("Player 2 Wins!");
+        clearBoard();
       }, 3);
     }
   }
@@ -138,12 +142,14 @@ const checkDiagonal = (diagonal, currentPlayer) => {
     if (letter1 === "X" && letter2 === "X" && letter3 === "X") {
       setTimeout(() => {
         alert("Player 1 Wins!");
+        clearBoard();
       }, 3);
     }
   } else {
     if (letter1 === "O" && letter2 === "O" && letter3 === "O") {
       setTimeout(() => {
         alert("Player 2 Wins!");
+        clearBoard();
       }, 3);
     }
   }
@@ -205,4 +211,22 @@ function switchPlayer(currentPlayer) {
     ? (currentPlayer = player2)
     : (currentPlayer = player1);
   return currentPlayer;
+}
+
+// clears the board
+function clearBoard() {
+  const row1 = document.querySelector(".row1").children;
+  const row2 = document.querySelector(".row2").children;
+  const row3 = document.querySelector(".row3").children;
+  removeClassListAndTextContent(row1);
+  removeClassListAndTextContent(row2);
+  removeClassListAndTextContent(row3);
+}
+
+// removes the additional class and textContent of all squares in the row
+const removeClassListAndTextContent = (row) => {
+  for (let i = 0; i < row.length; i++) {
+    row[i].classList.remove("hasLetter");
+    row[i].textContent = "";
+  }
 }
