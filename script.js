@@ -1,6 +1,6 @@
 // create player1 and player2 and set currentPlayer to player1
-let player1 = "player1";
-let player2 = "player2";
+let player1 = { name: "player1", score: 0 };
+let player2 = { name: "player2", score: 0 };
 let currentPlayer = player1;
 
 /* a Set that contains the square names that match
@@ -89,7 +89,7 @@ const checkRows = (row, currentPlayer) => {
   const letter1 = row.children[0].textContent.trim();
   const letter2 = row.children[1].textContent.trim();
   const letter3 = row.children[2].textContent.trim();
-  if (currentPlayer === "player1") {
+  if (currentPlayer === player1) {
     if (letter1 === "X" && letter2 === "X" && letter3 === "X") {
       setTimeout(() => {
         alert("Player 1 Wins!");
@@ -111,7 +111,7 @@ const checkColumns = (column, currentPlayer) => {
   const letter1 = column[0].textContent.trim();
   const letter2 = column[1].textContent.trim();
   const letter3 = column[2].textContent.trim();
-  if (currentPlayer === "player1") {
+  if (currentPlayer === player1) {
     if (letter1 === "X" && letter2 === "X" && letter3 === "X") {
       setTimeout(() => {
         alert("Player 1 Wins!");
@@ -138,7 +138,7 @@ const checkDiagonal = (diagonal, currentPlayer) => {
   const letter1 = diagonal[0].textContent.trim();
   const letter2 = diagonal[1].textContent.trim();
   const letter3 = diagonal[2].textContent.trim();
-  if (currentPlayer === "player1") {
+  if (currentPlayer === player1) {
     if (letter1 === "X" && letter2 === "X" && letter3 === "X") {
       setTimeout(() => {
         alert("Player 1 Wins!");
@@ -229,4 +229,4 @@ const removeClassListAndTextContent = (row) => {
     row[i].classList.remove("hasLetter");
     row[i].textContent = "";
   }
-}
+};
