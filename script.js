@@ -94,6 +94,7 @@ const checkRows = (row, currentPlayer) => {
       setTimeout(() => {
         alert("Player 1 Wins!");
         clearBoard();
+        score(player1);
       }, 3);
     }
   } else {
@@ -101,6 +102,7 @@ const checkRows = (row, currentPlayer) => {
       setTimeout(() => {
         alert("Player 2 Wins!");
         clearBoard();
+        score(player2);
       }, 3);
     }
   }
@@ -116,6 +118,7 @@ const checkColumns = (column, currentPlayer) => {
       setTimeout(() => {
         alert("Player 1 Wins!");
         clearBoard();
+        score(player1);
       }, 3);
     }
   } else {
@@ -123,6 +126,7 @@ const checkColumns = (column, currentPlayer) => {
       setTimeout(() => {
         alert("Player 2 Wins!");
         clearBoard();
+        score(player2);
       }, 3);
     }
   }
@@ -143,6 +147,7 @@ const checkDiagonal = (diagonal, currentPlayer) => {
       setTimeout(() => {
         alert("Player 1 Wins!");
         clearBoard();
+        score(player1);
       }, 3);
     }
   } else {
@@ -150,6 +155,7 @@ const checkDiagonal = (diagonal, currentPlayer) => {
       setTimeout(() => {
         alert("Player 2 Wins!");
         clearBoard();
+        score(player2);
       }, 3);
     }
   }
@@ -230,3 +236,17 @@ const removeClassListAndTextContent = (row) => {
     row[i].textContent = "";
   }
 };
+
+/* gets the current score of the player who won
+   and updates their score
+*/
+function score(player) {
+  let score;
+  if (player === player1) {
+    score = document.getElementById("score1");
+  } else {
+    score = document.getElementById("score2");
+  }
+  player.score = player.score + 1;
+  score.textContent = player.score;
+}
