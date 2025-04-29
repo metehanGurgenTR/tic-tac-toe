@@ -54,10 +54,17 @@ const diagonal2 = [
 
    passes the square that was clicked on to the getColumn function
    which returns the column the square is in
+
+   passes the square that was clicked on to the getDiagonal
+   function which returns the diagonal array the square is in
    
-   then passes the column and currentPlayer to the checkColumns 
+   passes the column and currentPlayer to the checkColumns 
    function which checks if player1 or player2 wins
-   currently only checks the rows and columns
+
+   passes the diagonal array(s) and currentPlayer to the checkDiagonal
+   function which checks if player1 or player2 wins
+   
+   checks the rows, columns, and diagonals
 
    will only run the switchPlayer function if a 
    letter was inserted into a valid square
@@ -68,13 +75,16 @@ addEventListener("click", (event) => {
   const s = document.querySelector("." + square.className.split(" ")[0]);
   const row = s.parentElement;
   const column = getColumn(s);
+  const diagonal = getDiagonal(s);
   checkRows(row, currentPlayer);
   checkColumns(column, currentPlayer);
+  checkDiagonal(diagonal, currentPlayer);
   if (inserted) {
     currentPlayer = switchPlayer(currentPlayer);
   }
 });
 
+// check row of squares to determine if player1 or player2 won
 const checkRows = (row, currentPlayer) => {
   const letter1 = row.children[0].textContent.trim();
   const letter2 = row.children[1].textContent.trim();
@@ -94,6 +104,7 @@ const checkRows = (row, currentPlayer) => {
   }
 };
 
+// check column of squares to determine if player1 or player2 won
 const checkColumns = (column, currentPlayer) => {
   const letter1 = column[0].textContent.trim();
   const letter2 = column[1].textContent.trim();
@@ -113,6 +124,32 @@ const checkColumns = (column, currentPlayer) => {
   }
 };
 
+// check diagonal of squares to determine if player1 or player2 won
+const checkDiagonal = (diagonal, currentPlayer) => {
+  if (diagonal.length === 2) {
+    checkDiagonal(diagonal[0], currentPlayer);
+    checkDiagonal(diagonal[1], currentPlayer);
+    return;
+  }
+  const letter1 = diagonal[0].textContent.trim();
+  const letter2 = diagonal[1].textContent.trim();
+  const letter3 = diagonal[2].textContent.trim();
+  if (currentPlayer === "player1") {
+    if (letter1 === "X" && letter2 === "X" && letter3 === "X") {
+      setTimeout(() => {
+        alert("Player 1 Wins!");
+      }, 3);
+    }
+  } else {
+    if (letter1 === "O" && letter2 === "O" && letter3 === "O") {
+      setTimeout(() => {
+        alert("Player 2 Wins!");
+      }, 3);
+    }
+  }
+};
+
+// return the column the square is in
 function getColumn(square) {
   let column;
   if (column1.includes(square)) {
@@ -124,6 +161,22 @@ function getColumn(square) {
   }
   return column;
 }
+
+// return the diagonal array(s) the square is in
+function getDiagonal(square) {
+  let diagonal;
+  if (square.className.split(" ")[0] === "square5") {
+    diagonal = [diagonal1, diagonal2];
+    return diagonal;
+  }
+  if (diagonal1.includes(square)) {
+    diagonal = diagonal1;
+  } else {
+    diagonal = diagonal2;
+  }
+  return diagonal;
+}
+
 /* check if set contains the square that was clicked and is empty
    if so, insert letter X or O into the square based on currentPlayer
 */
