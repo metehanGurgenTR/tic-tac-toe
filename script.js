@@ -1,6 +1,6 @@
 // create player1 and player2 and set currentPlayer to player1
-let player1 = { name: "player1", score: 0 };
-let player2 = { name: "player2", score: 0 };
+let player1 = { name: "player1", score: 0, won: false };
+let player2 = { name: "player2", score: 0, won: false };
 let currentPlayer = player1;
 
 /* a Set that contains the square names that match
@@ -68,6 +68,8 @@ const diagonal2 = [
 
    will check if it is a draw
 
+   after a win or a draw, the game resets
+
    will only run the switchPlayer function if a 
    letter was inserted into a valid square
 */
@@ -81,10 +83,11 @@ addEventListener("click", (event) => {
   checkRows(row, currentPlayer);
   checkColumns(column, currentPlayer);
   checkDiagonal(diagonal, currentPlayer);
-  if (checkIfDraw(getRows())) {
+  if (checkIfDraw(getRows(), currentPlayer)) {
     setTimeout(() => {
       alert("Draw!");
       clearBoard();
+      reset();
     }, 3);
   }
   if (inserted) {
@@ -92,56 +95,85 @@ addEventListener("click", (event) => {
   }
 });
 
-// check row of squares to determine if player1 or player2 won
+/* check row of squares to determine if player1 or player2 won
+
+   checks row of squares only if player1 or player2 has not won yet.
+   if player1 or player2 has already won, then no need to check rows
+*/
 const checkRows = (row, currentPlayer) => {
+  if (currentPlayer.won === true) {
+    return;
+  }
   const letter1 = row.children[0].textContent.trim();
   const letter2 = row.children[1].textContent.trim();
   const letter3 = row.children[2].textContent.trim();
   if (currentPlayer === player1) {
     if (letter1 === "X" && letter2 === "X" && letter3 === "X") {
+      currentPlayer.won = true;
       setTimeout(() => {
         alert("Player 1 Wins!");
         clearBoard();
         score(player1);
+        reset();
       }, 3);
     }
   } else {
     if (letter1 === "O" && letter2 === "O" && letter3 === "O") {
+      currentPlayer.won = true;
       setTimeout(() => {
         alert("Player 2 Wins!");
         clearBoard();
         score(player2);
+        reset();
       }, 3);
     }
   }
 };
 
-// check column of squares to determine if player1 or player2 won
+/* check column of squares to determine if player1 or player2 won
+
+   checks column of squares only if player1 or player2 has not won yet.
+   if player1 or player2 has already won, then no need to check columns
+*/
 const checkColumns = (column, currentPlayer) => {
+  if (currentPlayer.won === true) {
+    return;
+  }
   const letter1 = column[0].textContent.trim();
   const letter2 = column[1].textContent.trim();
   const letter3 = column[2].textContent.trim();
   if (currentPlayer === player1) {
     if (letter1 === "X" && letter2 === "X" && letter3 === "X") {
+      currentPlayer.won = true;
       setTimeout(() => {
         alert("Player 1 Wins!");
         clearBoard();
         score(player1);
+        reset();
       }, 3);
     }
   } else {
     if (letter1 === "O" && letter2 === "O" && letter3 === "O") {
+      currentPlayer.won = true;
       setTimeout(() => {
         alert("Player 2 Wins!");
         clearBoard();
         score(player2);
+        reset();
       }, 3);
     }
   }
 };
 
-// check diagonal of squares to determine if player1 or player2 won
+/* check diagonal of squares to determine if player1 or player2 won
+
+   checks diagonal of squares only if player1 or player2 has not won yet.
+   if player1 or player2 has already won, then no need to check diagonals
+*/
 const checkDiagonal = (diagonal, currentPlayer) => {
+  if (currentPlayer.won === true) {
+    return;
+  }
   if (diagonal.length === 2) {
     checkDiagonal(diagonal[0], currentPlayer);
     checkDiagonal(diagonal[1], currentPlayer);
@@ -152,18 +184,22 @@ const checkDiagonal = (diagonal, currentPlayer) => {
   const letter3 = diagonal[2].textContent.trim();
   if (currentPlayer === player1) {
     if (letter1 === "X" && letter2 === "X" && letter3 === "X") {
+      currentPlayer.won = true;
       setTimeout(() => {
         alert("Player 1 Wins!");
         clearBoard();
         score(player1);
+        reset();
       }, 3);
     }
   } else {
     if (letter1 === "O" && letter2 === "O" && letter3 === "O") {
+      currentPlayer.won = true;
       setTimeout(() => {
         alert("Player 2 Wins!");
         clearBoard();
         score(player2);
+        reset();
       }, 3);
     }
   }
@@ -261,10 +297,10 @@ function score(player) {
 
 // returns an array of each rows child elements
 const getRows = () => {
-    const row1 = document.querySelector(".row1").children;
-    const row2 = document.querySelector(".row2").children;
-    const row3 = document.querySelector(".row3").children;
-    const rows = [row1, row2, row3];
+  const row1 = document.querySelector(".row1").children;
+  const row2 = document.querySelector(".row2").children;
+  const row3 = document.querySelector(".row3").children;
+  const rows = [row1, row2, row3];
   return rows;
 };
 
@@ -274,7 +310,10 @@ const getRows = () => {
    have this additional "hasLetter" class, and no winner 
    has been declared, then all the squares have letters and it is a draw
 */
-function checkIfDraw(rows) {
+function checkIfDraw(rows, currentPlayer) {
+  if (currentPlayer.won === true) {
+    return;
+  }
   for (let i = 0; i < rows.length; i++) {
     for (let j = 0; j < rows[i].length; j++) {
       if (rows[i][j].className.split(" ").length !== 2) {
@@ -283,4 +322,12 @@ function checkIfDraw(rows) {
     }
   }
   return true;
+}
+
+// sets won property of player1 and player2 to false
+// currentPlayer is set to player1
+function reset() {
+  player1.won = false;
+  player2.won = false;
+  currentPlayer = player1;
 }
