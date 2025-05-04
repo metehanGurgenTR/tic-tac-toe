@@ -4,6 +4,7 @@ body {
 }
 
 .container {
+  background-image: linear-gradient(to bottom right, #5c00aa8a, #00cdff78);
   position: fixed;
   display: flex;
   width: 100%;
@@ -90,7 +91,7 @@ body {
 .square8,
 .square9 {
   width: 33%;
-  border: 0.3rem solid black;
+  border: 0.3rem solid #d0d0d0;
   display: flex;
   justify-content: center;
   align-items: center;
